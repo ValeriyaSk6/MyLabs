@@ -1,0 +1,22 @@
+<app-my-header name="Лабораторна робота №3"></app-my-header>
+<ion-content [fullscreen]="true" color="primary">
+    <p>Позначити кольорами значення які більше за середню вагу, менші за середню вагу та дорівнює їй.</p>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Cпортивне обладнання</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      
+      <ion-card 
+      *ngFor="let eq of eqList.eqList; index as i"
+      [ngStyle]="{backgroundColor: getColor(eq.weight)}">
+        <ion-card-header>
+          <ion-card-title>{{eq.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label>{{eq.displayInfo()}}</ion-label>
+        </ion-card-content>
+      </ion-card> 
+    </ion-card-content>
+  </ion-card>
+</ion-content>

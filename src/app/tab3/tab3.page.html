@@ -1,17 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
-</ion-content>
+<app-my-header name="Лабораторна робота №1"></app-my-header>
+<ion-content [fullscreen]="true" color="primary">
+  <ion-card-content>
+    <p>Завдання №3</p>
+    <p>Згенерувати матрицю розміром NxN. Знайдіть кількість елементів, що знаходяться на головній діагоналі і є простими.</p>
+        <ion-item>
+          <ion-input
+            label="Розмір матриці"
+            labelPlacement="stacked"
+            type="number"
+            id=""
+            value="1"
+            #Inputn
+          ></ion-input>
+        </ion-item>
+      <ion-button
+      color="secondary" 
+      expand="block"
+      (click)="generateMatrix(Inputn.value)"
+      >Розрахунок</ion-button>
+      <ion-grid>
+        <ion-row *ngFor="let i of matrix">
+          <ion-col 
+          *ngFor="let j of i"
+          [ngStyle]="{backgroundColor: '#000080'}">
+            {{j}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <p [innerHTML]="result"></p>
+  </ion-card-content>
+</ion-content> 

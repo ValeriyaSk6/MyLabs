@@ -1,17 +1,45 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+<app-my-header name="Лабораторна робота №1"></app-my-header>
+<ion-content [fullscreen]="true" color="primary">
+  <ion-card-content>
+    <p color="tertiary">Завдання №1</p>
+    <p>Задано три числа. Знайти суму тих з них, які кратні 9, якщо їх сума непарна.</p>
+      <div>
+        <ion-item>
+          <ion-input
+            label="Перше число"
+            labelPlacement="stacked"
+            type="number"
+            id="a"
+            value="1"
+            #Inputa
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Друге число"
+            labelPlacement="stacked"
+            type="number"
+            id="b"
+            value="2"
+            #Inputb
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Третє число"
+            labelPlacement="stacked"
+            type="number"
+            id="c"
+            value="3"
+            #Inputc
+          ></ion-input>
+        </ion-item>
+      </div>
+      <ion-button
+      color="secondary" 
+      expand="block"
+      (click)="calculate(Inputa.value, Inputb.value, Inputc.value)"
+      >Розрахунок</ion-button>
+        <p>Результат обчислення: {{result}}</p>
+  </ion-card-content>
+</ion-content> 
