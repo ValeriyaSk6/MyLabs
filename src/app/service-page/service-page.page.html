@@ -1,0 +1,58 @@
+<app-my-header name="Лабораторна робота №5"></app-my-header>
+<ion-content [fullscreen]="true">
+  <ion-card color="secondary">
+    <ion-card-header color="tertiary">
+      <ion-card-title >Завдання</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+       Провести табулювання, обрахувати за допомогою циклу та рекурсії функцію (1/√(1+x))
+      </p>
+        <ion-item color="light">
+          <ion-input 
+            label="Початок діапазону"
+            lablePlacement="stacked"
+            type="number"
+            value="-0.9"
+            #InputXn
+          ></ion-input>
+        </ion-item>
+        <ion-item color="light">
+          <ion-input
+            label="Кінець діапазону"
+            lablePlacement="stacked"
+            type="number"
+            value="0.9"
+            #InputXk
+        ></ion-input>
+      </ion-item>
+      <ion-item color="light">
+          <ion-input
+            label="Крок"
+            lablePlacement="stacked"
+            type="number"
+            value="0.1"
+            #InputH
+        ></ion-input>
+      </ion-item>
+      <ion-button (click)="ras(InputXn.value, InputXk.value, InputH.value)"
+        >Розрахунок</ion-button>
+      <ion-card>
+        <ion-card-title>
+          <h1>Результати обчислення</h1>
+        </ion-card-title>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let item of xyInput ; index as i">
+              <ion-label>
+                <h5>{{xx[i]}}</h5>
+                <h5>{{item }}</h5>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>    
+    </ion-card-content> 
+  </ion-card>
+  <canvas #lineCanvas></canvas> 
+</ion-content>
