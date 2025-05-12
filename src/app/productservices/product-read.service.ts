@@ -14,7 +14,7 @@ export class ProductReadService {
 
   constructor() {}
 
-  private addProduct(item: any): void {
+  public addProduct(item: any): void {
     try {
       const product = MusicProductFactory.createProduct(item);
       console.log('Product created:', product);

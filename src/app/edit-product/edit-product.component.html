@@ -1,0 +1,92 @@
+<ion-card>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <ion-card-header>
+      <ion-card-title>Редагувати товар</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Назва</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Ціна</ion-label>
+        <ion-input type="number" formControlName="price"></ion-input>
+      </ion-item>
+
+      <div *ngIf="productForm.contains('artist')">
+        <ion-item>
+          <ion-label position="floating">Виконавець</ion-label>
+          <ion-input formControlName="artist"></ion-input>
+        </ion-item>
+      </div>
+
+      <div *ngIf="productForm.contains('year')">
+        <ion-item>
+          <ion-label position="floating">Рік</ion-label>
+          <ion-input type="number" formControlName="year"></ion-input>
+        </ion-item>
+      </div>
+
+      <div *ngIf="productForm.contains('rpm')">
+        <ion-item>
+          <ion-label position="floating">Обертів за хв</ion-label>
+          <ion-input type="number" formControlName="rpm"></ion-input>
+        </ion-item>
+      </div>
+
+      <div *ngIf="productForm.contains('tracks')">
+        <ion-item>
+          <ion-label position="floating">Кількість треків</ion-label>
+          <ion-input type="number" formControlName="tracks"></ion-input>
+        </ion-item>
+      </div>
+
+      <div *ngIf="productForm.contains('format')">
+        <ion-item>
+          <ion-label position="floating">Формат</ion-label>
+          <ion-input type="text" formControlName="format"></ion-input>
+        </ion-item>
+      </div>
+
+      <div *ngIf="productForm.contains('instrumentType')">
+        <ion-item>
+          <ion-label position="floating">Тип інструменту</ion-label>
+          <ion-input formControlName="instrumentType"></ion-input>
+        </ion-item>
+      </div>
+
+      <div *ngIf="productForm.contains('brand')">
+        <ion-item>
+          <ion-label position="floating">Бренд</ion-label>
+          <ion-input formControlName="brand"></ion-input>
+        </ion-item>
+      </div>
+
+      <div *ngIf="productForm.contains('isElectronic')">
+        <ion-item>
+          <ion-label>Електронний</ion-label>
+          <ion-segment
+            [value]="productForm.get('isElectronic')?.value"
+            (ionChange)="onElectronicChange($event.detail.value)"
+          >
+            <ion-segment-button value="true">
+              <ion-label>Так</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="false">
+              <ion-label>Ні</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-item>
+        
+      </div>
+
+      <ion-item>
+        <ion-button expand="block" type="submit" [disabled]="productForm.invalid">
+          Зберегти зміни
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </form>
+</ion-card>
