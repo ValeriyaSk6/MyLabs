@@ -29,9 +29,9 @@ describe('MusicalInstrument', () => {
 
   it('getDetails', () => {
     expect(instrument.getDetails()).toEqual([
-      'Type: Keyboard',
-      'Brand: Yamaha',
-      'Electronic: true'
+      'Тип інструмента: Keyboard',
+      'Бренд: Yamaha',
+      'Електронний: Так'
     ]);
   });
 });

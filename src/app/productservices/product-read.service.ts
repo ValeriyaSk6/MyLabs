@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IMusicProduct } from '../products/imusicproduct';
 import { MusicProductFactory } from '../products/musicproductfactory';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import { ProductTypeSelectorService } from './product-type-selector.service';
 
 const API_URL = 'https://api.jsonbin.io/v3/b/681f3f238960c979a596ab25';
 
@@ -10,15 +11,28 @@ const API_URL = 'https://api.jsonbin.io/v3/b/681f3f238960c979a596ab25';
 })
 export class ProductReadService {
   public products: IMusicProduct[] = [];
+  private productsSubject = new BehaviorSubject<IMusicProduct[]>([]);
   public loaded$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {}
+  public filteredProducts$ = combineLatest([
+    this.productsSubject.asObservable(),
+    this.productTypeSelector.type$
+  ]).pipe(
+    map(([products, selectedType]) =>
+      products.filter(p => p.getType() === selectedType)
+    )
+  );
+
+  constructor(
+    private productTypeSelector: ProductTypeSelectorService,
+  ) {}
 
   public addProduct(item: any): void {
     try {
       const product = MusicProductFactory.createProduct(item);
       console.log('Product created:', product);
       this.products.push(product);
+      this.productsSubject.next(this.products); // оновлюємо BehaviorSubject
     } catch (error) {
       console.warn('Skipped invalid product:', item, error);
     }
@@ -40,6 +54,7 @@ export class ProductReadService {
       this.products = [];
       records.forEach((item: any) => this.addProduct(item));
 
+      this.productsSubject.next(this.products); // передаємо список
       this.loaded$.next(true);
     } catch (error) {
       console.error('Error loading products:', error);

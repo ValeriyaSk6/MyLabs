@@ -19,9 +19,19 @@ describe('formatValidator', () => {
     expect(validatorFn(control)).toBeNull();
   });
 
-  it('should fail if contains digits', () => {
+  it('should pass with letters and digits', () => {
     const control = { value: 'MP3Format' } as AbstractControl;
-    expect(validatorFn(control)).toEqual({ format: true });
+    expect(validatorFn(control)).toBeNull();
+  });
+
+  it('should pass with dashes', () => {
+    const control = { value: 'Flac-24' } as AbstractControl;
+    expect(validatorFn(control)).toBeNull();
+  });
+
+  it('should pass with underscores', () => {
+    const control = { value: 'Hi_Res_Audio' } as AbstractControl;
+    expect(validatorFn(control)).toBeNull();
   });
 
   it('should fail if contains symbols', () => {

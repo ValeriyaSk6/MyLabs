@@ -2,15 +2,20 @@
 
 <ion-content [fullscreen]="true">
   <h1 class="store-title">Магазин музики</h1>
+  <ion-item>
+    <ion-button (click)="nextType()">Наступна категорія</ion-button>
+    <div style="margin-top: 20px;"></div>
+    <ion-label>Поточна категорія:{{ productTypeSelector.CurrentType }} </ion-label>
+  </ion-item>
+  <div style="margin-top: 20px;"></div>
+  <ion-item> 
+    <ion-button (click)="addFormShow()">Додати товар</ion-button>
+    <app-add-product 
+      *ngIf="showAddForm" 
+      (productAdd)="addProduct($event)">
+    </app-add-product>
+  </ion-item>
 
-  <!-- Кнопка і форма додавання товару – зверху -->
-  <ion-button (click)="addFormShow()">Додати товар</ion-button>
-  <app-add-product 
-    *ngIf="showAddForm" 
-    (productAdd)="addProduct($event)">
-  </app-add-product>
-
-  <!-- Список товарів -->
   <ng-container *ngFor="let product of searchProducts">
     <ion-card>
       <ion-card-header>
@@ -32,7 +37,6 @@
       </ion-card-content>
     </ion-card>
 
-    <!-- Редагування – під товаром -->
     <app-edit-product
       *ngIf="showEditForm && selectedProduct === product"
       [product]="selectedProduct"

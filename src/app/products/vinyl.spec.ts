@@ -29,9 +29,9 @@ describe('Vinyl', () => {
 
   it('getDetails', () => {
     expect(vinyl.getDetails()).toEqual([
-      'Artist: Pink Floyd',
-      'Year: 1973',
-      'RPM: 33'
+      'Виконавець: Pink Floyd',
+      'Рік: 1973',
+      'Швидкість обертання: 33 об/хв'
     ]);
   });
 });

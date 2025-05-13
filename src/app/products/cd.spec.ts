@@ -21,9 +21,9 @@ describe('CD', () => {
 
   it('getDetails', () => {
     expect(cd.getDetails()).toEqual([
-      'Artist: Michael Jackson',
-      'Year: 1982',
-      'Tracks: 9'
+      'Виконавець: Michael Jackson',
+      'Рік: 1982',
+      'Кількість треків: 9'
     ]);
   });
 });

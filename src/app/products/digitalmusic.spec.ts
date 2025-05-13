@@ -21,9 +21,9 @@ describe('DigitalMusic', () => {
 
   it('getDetails', () => {
     expect(dm.getDetails()).toEqual([
-      'Artist: The Weeknd',
-      'Year: 2020',
-      'Format: mp3'
+      'Виконавець: The Weeknd',
+      'Рік: 2020',
+      'Формат: mp3'
     ]);
   });
 });

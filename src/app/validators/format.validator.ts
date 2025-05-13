@@ -1,8 +1,13 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 
 export function formatValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: boolean } | null => {
-    const value = control.value;
-    return /^[A-Za-z]+$/.test(value) ? null : { format: true };
-  };
-}
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+  
+      if (value == null || typeof value !== 'string') {
+        return { format: true };
+      }
+      const isValid = /^[\w-]+$/.test(value);
+      return isValid ? null : { format: true };
+    };
+  }

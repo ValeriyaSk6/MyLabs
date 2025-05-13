@@ -7,60 +7,69 @@
     <ion-card-content>
       <ion-item>
         <ion-label position="floating">Назва</ion-label>
-        <ion-input type="text" formControlName="name"></ion-input>
+        <ion-input type="text" formControlName="name" 
+        errorText="Назва повинна починатися з великої літери та не містити спецсимволів"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Ціна</ion-label>
-        <ion-input type="number" formControlName="price"></ion-input>
+        <ion-input type="number" formControlName="price" 
+        errorText="Ціна повинна бути більшою за 0"></ion-input>
       </ion-item>
 
       <div *ngIf="productForm.contains('artist')">
         <ion-item>
           <ion-label position="floating">Виконавець</ion-label>
-          <ion-input formControlName="artist"></ion-input>
+          <ion-input formControlName="artist" 
+          errorText="Поле обов'язкове"></ion-input>
         </ion-item>
       </div>
 
       <div *ngIf="productForm.contains('year')">
         <ion-item>
           <ion-label position="floating">Рік</ion-label>
-          <ion-input type="number" formControlName="year"></ion-input>
+          <ion-input type="number" formControlName="year" 
+          errorText = "Рік повинен бути більшим за 1800 та не більше поточного"></ion-input>
         </ion-item>
       </div>
 
       <div *ngIf="productForm.contains('rpm')">
         <ion-item>
           <ion-label position="floating">Обертів за хв</ion-label>
-          <ion-input type="number" formControlName="rpm"></ion-input>
+          <ion-input type="number" formControlName="rpm" 
+          errorText="Значення повинно бути більшим за 0"></ion-input>
         </ion-item>
       </div>
 
       <div *ngIf="productForm.contains('tracks')">
         <ion-item>
           <ion-label position="floating">Кількість треків</ion-label>
-          <ion-input type="number" formControlName="tracks"></ion-input>
+          <ion-input type="number" formControlName="tracks"
+          errorText="Від 1 до 100 треків"></ion-input>
         </ion-item>
       </div>
 
       <div *ngIf="productForm.contains('format')">
         <ion-item>
           <ion-label position="floating">Формат</ion-label>
-          <ion-input type="text" formControlName="format"></ion-input>
+          <ion-input type="text" formControlName="format"
+          errorText="Допустимі лише латинські літери та цифри"></ion-input>
         </ion-item>
       </div>
 
       <div *ngIf="productForm.contains('instrumentType')">
         <ion-item>
           <ion-label position="floating">Тип інструменту</ion-label>
-          <ion-input formControlName="instrumentType"></ion-input>
+          <ion-input formControlName="instrumentType"
+          errorText="Поле обов'язкове"></ion-input>
         </ion-item>
       </div>
 
       <div *ngIf="productForm.contains('brand')">
         <ion-item>
           <ion-label position="floating">Бренд</ion-label>
-          <ion-input formControlName="brand"></ion-input>
+          <ion-input formControlName="brand"
+          errorText="Поле обов'язкове"></ion-input>
         </ion-item>
       </div>
 

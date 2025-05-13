@@ -7,6 +7,9 @@ import { MyHeaderComponent } from '../my-header/my-header.component';
 import { AddProductComponent } from '../add-product/add-product.component'; 
 import { EditProductComponent } from '../edit-product/edit-product.component'; 
 import { Subscription } from 'rxjs';
+import { ProductTypeSelectorService } from '../productservices/product-type-selector.service';
+import { productType } from '../products/musicproductfactory';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-lab6',
@@ -16,30 +19,46 @@ import { Subscription } from 'rxjs';
   imports: [
     IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, 
     IonButton, IonItem, IonLabel, IonContent,
-    NgFor, NgIf, MyHeaderComponent, AddProductComponent, EditProductComponent
+    NgFor, NgIf, MyHeaderComponent, AddProductComponent, EditProductComponent, FormsModule
   ]
 })
 export class Lab6Page implements OnInit, OnDestroy {
   searchProducts: IMusicProduct[] = [];
+  private subscriptions: Subscription[] = [];
   showAddForm = false;
   showEditForm = false;
   selectedProduct: IMusicProduct | null = null;
 
-  private loadedSubscription!: Subscription;
-
-  constructor(public productReadService: ProductReadService) {}
+  constructor(
+    public productReadService: ProductReadService,
+    public productTypeSelector: ProductTypeSelectorService,
+  ) {}
 
   ngOnInit() {
     this.productReadService.load();
-    this.loadedSubscription = this.productReadService.loaded$.subscribe(loaded => {
+
+    const loadSub = this.productReadService.loaded$.subscribe(loaded => {
       if (loaded) {
-        this.searchProducts = this.productReadService.products;
+        const filteredSub = this.productReadService.filteredProducts$.subscribe(products => {
+          this.searchProducts = products;
+        });
+        this.subscriptions.push(filteredSub);
       }
     });
+
+    this.subscriptions.push(loadSub);
+  }
+
+  nextType() {
+    const current = this.productTypeSelector.CurrentType;
+    const currentIndex = productType.indexOf(current);
+    const nextIndex = (currentIndex + 1) % productType.length;
+    const next = productType[nextIndex];
+    this.productTypeSelector.setType(next);
   }
 
   ngOnDestroy() {
-    this.loadedSubscription.unsubscribe();
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   addFormShow() {
@@ -76,4 +95,5 @@ export class Lab6Page implements OnInit, OnDestroy {
     }
     this.searchProducts = this.productReadService.products;
   }
+
 }
